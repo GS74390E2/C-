@@ -10,6 +10,7 @@
 #include <string>
 
 using std::string;
+using std::cin;
 using std::cout;
 using std::endl;
 
@@ -39,6 +40,16 @@ private:
 class matrixSizeMismatch{
 public:
     matrixSizeMismatch():message("matrix A and matrix B are not same size"){}
+    void what(){
+        cout << message << endl;
+    }
+private:
+    string message;
+};
+
+class stackEmpty{
+public:
+    stackEmpty():message("stack is empty"){}
     void what(){
         cout << message << endl;
     }
