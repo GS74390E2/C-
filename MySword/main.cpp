@@ -66,6 +66,47 @@ namespace Q0 {
         arrOutput(nums, numsSize);
     }
 
+    void QuickSort(int *nums, int left, int right) {
+        // 快速排序: 选出基准值k，小于k的放到左边，大于k的放到右边
+        int begin = left;
+        int end = right;
+        int base = nums[begin];
+
+        while (begin < end) {
+            // 找到左边第一个比基准值小的
+            while (nums[begin] < base) ++begin;
+            while (nums[end] > base) --end;
+            if (begin < end) {
+                int temp = nums[begin];
+                nums[begin] = nums[end];
+                nums[end] = temp;
+                --end;
+                ++begin;
+            }
+        }
+        if (begin == end)
+            ++begin;
+        if (left < end)
+            QuickSort(nums, left, begin - 1);
+        if (begin < right)
+            QuickSort(nums, end + 1, right);
+    }
+
+    void ShellSort(int *nums, int numsSize) {
+        // 带步长的插入排序
+        for (int step = numsSize / 2; step >= 1; step /= 2) {
+            for (int i = step; i < numsSize; ++i) {
+                int temp = nums[i];
+                int j = i - step;
+                while (j >= 0 && nums[j] > temp) {
+                    nums[j + step] = nums[j];
+                    j -= step;
+                }
+                nums[j + step] = temp;
+            }
+        }
+    }
+
     int test() {
         int nums[] = {3, 9, 0, 6, 7, 4, 3, 9, 0, 2};
         int numsSize = 10;
@@ -77,7 +118,14 @@ namespace Q0 {
         // SelectSort(nums, numsSize);
 
         // 插入排序
-        InsertSort(nums, numsSize);
+        // InsertSort(nums, numsSize);
+
+        // 快速排序
+        QuickSort(nums, 0, 9);
+
+        // 希尔排序
+        // ShellSort(nums, numsSize);
+        arrOutput(nums, 10);
         return 0;
     }
 }
@@ -378,8 +426,46 @@ namespace Q10 {
     }
 }
 
+namespace Q11 {
+    // 旋转数组的最小数字
+    int MinInOrder(int *nums, int index1, int index2) {
+        int result = nums[index1];
+        for (int i = index1 + 1; i <= index2; ++i) {
+            if (result > nums[i])
+                result = nums[i];
+        }
+        return result;
+    }
+
+    int Min(int *nums, int numsSize) {
+        if (nums == nullptr || numsSize <= 0) {
+            std::cout << "Invalid parameters" << std::endl;
+            return -1;
+        }
+        int index1 = 0;
+        int index2 = numsSize - 1;
+        int indexMid = index1;
+        while (nums[index1] >= nums[index2]) {
+            if (index2 - index1 == 1) {
+                indexMid = index2;
+                break;
+            }
+            indexMid = (index1 + index2) / 2;
+
+            if (nums[indexMid] == nums[index2] && nums[indexMid] == nums[index1])
+                return MinInOrder(nums, index1, index2);
+
+            if (nums[indexMid] >= nums[index1])
+                index1 = indexMid;
+            else if (nums[indexMid] <= nums[index2])
+                index2 = indexMid;
+        }
+        return nums[indexMid];
+    }
+}
+
 int main() {
-    // Q0::test();
+    Q0::test();
     // Q3::test();
     // Q5::test();
     // Q6::test();

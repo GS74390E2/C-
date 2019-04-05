@@ -23,36 +23,67 @@ public:
     void outputMessage() {
         cout << message << endl;
     }
+
 private:
     string message;
 };
 
-class matrixIndexOutOfBounds{
+class matrixIndexOutOfBounds {
 public:
-    matrixIndexOutOfBounds():message("matrix i or j is out of range"){}
-    void what(){
+    matrixIndexOutOfBounds() : message("matrix i or j is out of range") {}
+
+    void what() {
         cout << message << endl;
     }
+
 private:
     string message;
 };
 
-class matrixSizeMismatch{
+class matrixSizeMismatch {
 public:
-    matrixSizeMismatch():message("matrix A and matrix B are not same size"){}
-    void what(){
+    matrixSizeMismatch() : message("matrix A and matrix B are not same size") {}
+
+    void what() {
         cout << message << endl;
     }
+
 private:
     string message;
 };
 
-class stackEmpty{
+class stackEmpty {
 public:
-    stackEmpty():message("stack is empty"){}
-    void what(){
+    stackEmpty() : message("stack is empty") {}
+
+    void what() {
         cout << message << endl;
     }
+
+private:
+    string message;
+};
+
+class queueEmpty {
+public:
+    queueEmpty() : message("queue is empty") {}
+
+    void what() {
+        cout << message << endl;
+    }
+
+private:
+    string message;
+};
+
+class hashTableFull {
+public:
+    hashTableFull() : message("hashTable is full") {}
+
+    void what() {
+        cout << message << endl;
+    }
+
 private:
     string message;
 };

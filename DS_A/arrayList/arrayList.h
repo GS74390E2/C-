@@ -68,7 +68,7 @@ public:
     bool insert(int theIndex, T &theElement);
 
     // 7.追加元素
-    void push_back(T &theElement);
+    void push_back(const T &theElement);
 
     // 8.显示所有元素
     void output(std::ostream &out) const;
@@ -135,7 +135,7 @@ public:
         cout << "Info: 析构数组" << endl;
     }
 
-private:
+protected:
     T *data;
     int arrCapacity;
     int arrSize;
@@ -244,7 +244,7 @@ bool arrayList<T>::insert(int theIndex, T &theElement) {
 
 // 7.追加元素
 template<class T>
-inline void arrayList<T>::push_back(T &theElement) {
+inline void arrayList<T>::push_back(const T &theElement) {
     if (this->arrSize == this->arrCapacity) {
         int capacity_cre = 2;
         changeArr1D(this->data, this->arrCapacity, this->arrCapacity * capacity_cre);
